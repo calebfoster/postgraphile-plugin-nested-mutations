@@ -128,6 +128,10 @@ module.exports = function PostGraphileNestedMutationPlugin(builder) {
     ) => {
       const nestedFields = pgNestedPluginForwardInputTypes[table.id];
       const output = Object.assign({}, input);
+
+      if (!input)
+        return output
+
       await Promise.all(
         nestedFields
           .filter((k) => input[k.name])
